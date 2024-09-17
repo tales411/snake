@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds0symy8uqlt8"]
+
+[ext_resource type="Texture2D" uid="uid://bsfux40xmuept" path="res://tiles/buttonRound_grey.png" id="1_11dqy"]
+[ext_resource type="Script" path="res://scripts/fruit.gd" id="1_f1tfn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hquoy"]
+radius = 18.1482
+
+[node name="fruta" type="Area2D"]
+position = Vector2(0, -7)
+scale = Vector2(0.385714, 0.368421)
+script = ExtResource("1_f1tfn")
+
+[node name="ButtonRoundGrey" type="Sprite2D" parent="."]
+position = Vector2(0, -0.99949)
+texture = ExtResource("1_11dqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.71428)
+shape = SubResource("CircleShape2D_hquoy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

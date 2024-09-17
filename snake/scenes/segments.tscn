@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3mxip3gadtur"]
+
+[ext_resource type="Texture2D" uid="uid://dnlxd27xvgnw2" path="res://tiles/barGreen_horizontalMid.png" id="1_mltnk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbgxk"]
+size = Vector2(18.125, 17.625)
+
+[node name="segments" type="CharacterBody2D"]
+scale = Vector2(1.6, 1.6)
+
+[node name="BarGreenHorizontalMid" type="Sprite2D" parent="."]
+position = Vector2(0, -9.375)
+texture = ExtResource("1_mltnk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.90735e-06, -9.375)
+shape = SubResource("RectangleShape2D_cbgxk")

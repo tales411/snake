@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpk5uk7imf0t5"]
+
+[ext_resource type="Texture2D" uid="uid://ilg5gtjwx7vr" path="res://tiles/barRed_horizontalMid.png" id="1_oka3n"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_vytp5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_co2lv"]
+size = Vector2(28.6315, 28.6069)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_vytp5")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(3.75812, -13.7886)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("1_oka3n")
+
+[node name="colisao" type="CollisionShape2D" parent="."]
+position = Vector2(3.77867, -13.7421)
+shape = SubResource("RectangleShape2D_co2lv")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
