@@ -10,14 +10,8 @@ size = Vector2(28.6315, 28.6069)
 script = ExtResource("1_vytp5")
 
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(3.75812, -13.7886)
 scale = Vector2(1.6, 1.6)
 texture = ExtResource("1_oka3n")
 
 [node name="colisao" type="CollisionShape2D" parent="."]
-position = Vector2(3.77867, -13.7421)
 shape = SubResource("RectangleShape2D_co2lv")
-
-[node name="Timer" type="Timer" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
