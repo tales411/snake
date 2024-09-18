@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://d36u3i45iuw07"]
+[gd_scene load_steps=8 format=4 uid="uid://d36u3i45iuw07"]
 
-[ext_resource type="Script" path="res://scripts/map.gd" id="1_ttt0n"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ttt0n"]
 [ext_resource type="Texture2D" uid="uid://ygcf5tto41mn" path="res://TileMap/Floor.png" id="2_uxjrv"]
 [ext_resource type="PackedScene" uid="uid://ds0symy8uqlt8" path="res://scenes/fruit.tscn" id="3_p4lmt"]
 [ext_resource type="PackedScene" uid="uid://dpk5uk7imf0t5" path="res://scenes/player.tscn" id="4_aqy28"]
-[ext_resource type="PackedScene" uid="uid://d3mxip3gadtur" path="res://scenes/segments.tscn" id="5_45ixx"]
-[ext_resource type="Script" path="res://scripts/segments.gd" id="6_li2gu"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_vcf72"]
 tile_data = PackedInt32Array(0, 983041, 1, 65536, 1114113, 1, 1, 1114113, 1, 65537, 983041, 1)
@@ -525,10 +523,12 @@ position = Vector2(-70, 367)
 position = Vector2(-71, 640)
 
 [node name="player" parent="." instance=ExtResource("4_aqy28")]
-position = Vector2(236, 254)
+position = Vector2(272, 240)
 collision_mask = 2
 move_speed_timer = 0.15
 
-[node name="segments" parent="." instance=ExtResource("5_45ixx")]
-position = Vector2(145, 220)
-script = ExtResource("6_li2gu")
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.894
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="player" method="_on_timer_timeout"]
