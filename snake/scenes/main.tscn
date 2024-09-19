@@ -520,24 +520,24 @@ tile_set = SubResource("TileSet_ki8wf")
 position = Vector2(1022, -155)
 
 [node name="fruit" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(-159, 460)
+position = Vector2(-559, 653)
 
 [node name="fruit2" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(-165, 343)
+position = Vector2(-365, 653)
 
 [node name="fruit3" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(-60, 522)
+position = Vector2(-558, 462)
 
 [node name="fruit4" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(-70, 367)
+position = Vector2(-461, 557)
 
 [node name="fruit5" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(-71, 640)
+position = Vector2(-367, 460)
 
 [node name="player" parent="." instance=ExtResource("4_aqy28")]
 position = Vector2(208, 400)
 collision_mask = 2
-move_speed_timer = 1.0
+move_speed_timer = 0.25
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.894
@@ -560,6 +560,11 @@ shape = SubResource("RectangleShape2D_yf0lp")
 position = Vector2(399.5, 783.5)
 shape = SubResource("RectangleShape2D_s3ncp")
 
+[connection signal="body_entered" from="fruits/fruit" to="." method="_on_fruit_body_entered"]
+[connection signal="body_entered" from="fruits/fruit2" to="." method="_on_fruit_body_entered"]
+[connection signal="body_entered" from="fruits/fruit3" to="." method="_on_fruit_body_entered"]
+[connection signal="body_entered" from="fruits/fruit4" to="." method="_on_fruit_body_entered"]
+[connection signal="body_entered" from="fruits/fruit5" to="." method="_on_fruit_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="wall" to="player" method="_on_wall_body_entered"]
