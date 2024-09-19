@@ -9,7 +9,6 @@ func _ready():
 	move_timer = $"../Timer"
 	move_timer.wait_time = move_speed_timer  
 	
-
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):
 		direction_queue.append(Vector2.UP)
@@ -19,7 +18,8 @@ func _process(delta):
 		direction_queue.append(Vector2.LEFT)
 	elif Input.is_action_just_pressed("ui_right"):
 		direction_queue.append(Vector2.RIGHT)
-		move_timer.start() # começa o movimento
+		if move_timer.is_stopped():
+			move_timer.start() # começa o movimento
 
 
 
@@ -32,3 +32,8 @@ func _on_timer_timeout() -> void:
 			Global.direction = new_direction
 		
 	position += Global.direction * Global.grid_size # atualiza a posição da cobra
+
+
+func _on_wall_body_entered(body: Node2D) -> void:
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	
