@@ -8,7 +8,7 @@
 [sub_resource type="TileMapPattern" id="TileMapPattern_vcf72"]
 tile_data = PackedInt32Array(0, 983041, 1, 65536, 1114113, 1, 1, 1114113, 1, 65537, 983041, 1)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ovkpp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo37s"]
 texture = ExtResource("2_uxjrv")
 0:0/0 = 0
 1:0/0 = 0
@@ -493,7 +493,7 @@ texture = ExtResource("2_uxjrv")
 
 [sub_resource type="TileSet" id="TileSet_ki8wf"]
 physics_layer_0/collision_layer = 2
-sources/1 = SubResource("TileSetAtlasSource_ovkpp")
+sources/1 = SubResource("TileSetAtlasSource_bo37s")
 pattern_0 = SubResource("TileMapPattern_vcf72")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmlov"]
