@@ -35,5 +35,5 @@ func _on_timer_timeout() -> void:
 
 
 func _on_wall_body_entered(body: Node2D) -> void:
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/home_menu.tscn")
 	

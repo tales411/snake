@@ -20,7 +20,7 @@ func  _process(delta):
 	# colisao com os segmentos
 	for i in range(Global.snake_body.size() - 1, 0, -1):
 		if Global.snake_body[i].position == $player.position:
-			get_tree().change_scene_to_file("res://scenes/main.tscn")
+			get_tree().change_scene_to_file("res://scenes/home_menu.tscn")
 
 
 func _on_timer_timeout() -> void:
