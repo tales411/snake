@@ -8,7 +8,7 @@ func _ready():
 	Global.grid_size = 32 # Tamanho do grid 
 	Global.direction = Vector2.RIGHT # direção inicial (começa indo para a direita)
 	Global.snake_body = [] # lista do corpo da cobra
-	Global.initial_length = 5 # tamanho inicial da cobra
+	Global.initial_length = 6 # tamanho inicial da cobra
 	# cria o corpo inicial da cobra
 	for i in range(Global.initial_length):
 		var segment = Sprite2D.new()
@@ -47,20 +47,13 @@ func _grow():
 				
 				
 func _check_position(new_position):
-	# Verificar o tamanho do corpo da cobra
-	print("Tamanho do corpo da cobra: ", Global.snake_body.size())
 	
-	# Itera sobre o corpo da cobra de trás para frente
 	for i in range(Global.snake_body.size() - 1, -1, -1):
-		# Imprime as posições da cobra e a nova posição
-		print("Comparando posição da cobra: ", Global.snake_body[i].position, " com nova posição: ", new_position)
-		
 		# Verifica se a nova posição coincide com a posição do corpo da cobra
 		if Global.snake_body[i].position == new_position:
 			print("Posição inválida. A posição está colidindo com o corpo da cobra.")
 			return false  # Retorna false se a posição colidir
 	
-	# Se não houver colisão, retorna true
 	return true  # Retorna true se não houver colisão
 				
 				
@@ -71,10 +64,10 @@ func _spawn_fruit():
 	
 	while valid_position == false:
 		# Gera uma nova posição aleatória na linha fixa
-		var random_x = randi() % int(22) * 32
-		var fixed_y = 6 * 32  # Define a linha fixa no eixo Y
+		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)# -16 para alinhar no centro
+		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
 		
-		new_position = Vector2(random_x, fixed_y)
+		new_position = Vector2(random_x, random_y)
 		
 		# Verifica se a posição gerada é válida
 		valid_position = _check_position(new_position)
@@ -82,7 +75,3 @@ func _spawn_fruit():
 	# Quando uma posição válida for encontrada, posiciona a fruta
 	fruit.position = new_position
 	$fruits.add_child(fruit)
-
-
-
-
