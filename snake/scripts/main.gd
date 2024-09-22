@@ -1,11 +1,14 @@
 extends  Node2D
 
 
+var fruit_scene = preload("res://scenes/fruit.tscn")
+
+
 func _ready():
 	Global.grid_size = 32 # Tamanho do grid 
 	Global.direction = Vector2.RIGHT # direção inicial (começa indo para a direita)
 	Global.snake_body = [] # lista do corpo da cobra
-	Global.initial_length = 2 # tamanho inicial da cobra
+	Global.initial_length = 5 # tamanho inicial da cobra
 	# cria o corpo inicial da cobra
 	for i in range(Global.initial_length):
 		var segment = Sprite2D.new()
@@ -21,7 +24,11 @@ func  _process(delta):
 	for i in range(Global.snake_body.size() - 1, 0, -1):
 		if Global.snake_body[i].position == $player.position:
 			get_tree().change_scene_to_file("res://scenes/home_menu.tscn")
-
+	
+	if Global.fruit_entered == true:
+		_grow()
+		_spawn_fruit()
+		Global.fruit_entered = false
 
 func _on_timer_timeout() -> void:
 	for i in range(Global.snake_body.size() - 1, 0, -1): # nao entendi o pq do - 1, 0, -1
@@ -29,7 +36,6 @@ func _on_timer_timeout() -> void:
 	Global.snake_body[0].position = $player.position
 	
 func _grow():
-	print("aaa")
 	var new_segment = Sprite2D.new()
 	new_segment.texture = preload("res://tiles/barGreen_horizontalMid.png")
 	new_segment.scale.x = 1.6
@@ -40,7 +46,24 @@ func _grow():
 	
 	
 
-func _on_fruit_body_entered(body: Node2D) -> void:
-	if body.name == "player":
-		_grow()
-		
+
+func _spawn_fruit():
+	var valid_position = false
+	var fruit = fruit_scene.instantiate()
+	var new_position
+	while valid_position == false:
+		var random_x = randi() % int(22)*32
+		var random_y = randi() % int(19)*32
+		new_position = Vector2(random_x, 2*32)
+		for i in range(Global.snake_body.size() - 1, 0, -1):
+			if Global.snake_body[i].position == new_position:
+				print("teste")
+				valid_position = false
+				break
+			else:
+				valid_position = true
+				
+				
+				
+	fruit.position = new_position
+	$fruits.add_child(fruit)
