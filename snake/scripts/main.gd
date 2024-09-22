@@ -44,26 +44,45 @@ func _grow():
 	add_child(new_segment)
 	Global.snake_body.append(new_segment)
 	
+				
+				
+func _check_position(new_position):
+	# Verificar o tamanho do corpo da cobra
+	print("Tamanho do corpo da cobra: ", Global.snake_body.size())
 	
-
-
+	# Itera sobre o corpo da cobra de trás para frente
+	for i in range(Global.snake_body.size() - 1, -1, -1):
+		# Imprime as posições da cobra e a nova posição
+		print("Comparando posição da cobra: ", Global.snake_body[i].position, " com nova posição: ", new_position)
+		
+		# Verifica se a nova posição coincide com a posição do corpo da cobra
+		if Global.snake_body[i].position == new_position:
+			print("Posição inválida. A posição está colidindo com o corpo da cobra.")
+			return false  # Retorna false se a posição colidir
+	
+	# Se não houver colisão, retorna true
+	return true  # Retorna true se não houver colisão
+				
+				
 func _spawn_fruit():
 	var valid_position = false
 	var fruit = fruit_scene.instantiate()
 	var new_position
+	
 	while valid_position == false:
-		var random_x = randi() % int(22)*32
-		var random_y = randi() % int(19)*32
-		new_position = Vector2(random_x, 2*32)
-		for i in range(Global.snake_body.size() - 1, 0, -1):
-			if Global.snake_body[i].position == new_position:
-				print("teste")
-				valid_position = false
-				break
-			else:
-				valid_position = true
+		# Gera uma nova posição aleatória na linha fixa
+		var random_x = randi() % int(22) * 32
+		var fixed_y = 6 * 32  # Define a linha fixa no eixo Y
+		
+		new_position = Vector2(random_x, fixed_y)
+		
+		# Verifica se a posição gerada é válida
+		valid_position = _check_position(new_position)
 				
-				
-				
+	# Quando uma posição válida for encontrada, posiciona a fruta
 	fruit.position = new_position
 	$fruits.add_child(fruit)
+
+
+
+
