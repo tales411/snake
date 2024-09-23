@@ -525,19 +525,21 @@ tile_set = SubResource("TileSet_ki8wf")
 [node name="fruits" type="Node2D" parent="."]
 
 [node name="fruit" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(465.498, 337.712)
+
+=======
+position = Vector2(464, 304)
 
 [node name="fruit2" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(528.439, 401.674)
+position = Vector2(528, 370.52)
 
 [node name="fruit3" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(462.586, 465.761)
+position = Vector2(464, 400)
 
 [node name="fruit4" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(592.707, 337.234)
+position = Vector2(592, 304)
 
 [node name="fruit5" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(590.586, 465.491)
+position = Vector2(592, 400)
 
 [node name="player" parent="." instance=ExtResource("4_aqy28")]
 position = Vector2(208, 400)

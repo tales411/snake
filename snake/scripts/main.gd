@@ -87,6 +87,7 @@ func _spawn_fruit():
 	$fruits.add_child(fruit)
 
 
+
 func _score():
 	points += 1
 	$score/points.text = str(points)
@@ -110,3 +111,4 @@ func _load_record():
 	config.load(path)
 	record = config.get_value("scores", "high_scores", record)
 	$score/record.text = str(record)
+
