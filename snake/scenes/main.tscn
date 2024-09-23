@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://d36u3i45iuw07"]
+[gd_scene load_steps=14 format=4 uid="uid://d36u3i45iuw07"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ttt0n"]
 [ext_resource type="Texture2D" uid="uid://ygcf5tto41mn" path="res://TileMap/Floor.png" id="2_uxjrv"]
@@ -508,6 +508,12 @@ size = Vector2(797, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3ncp"]
 size = Vector2(797, 27)
 
+[sub_resource type="LabelSettings" id="LabelSettings_mntpx"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ia6ck"]
+font_size = 24
+
 [node name="main game" type="Node2D"]
 script = ExtResource("1_ttt0n")
 
@@ -517,22 +523,21 @@ tile_map_data = PackedByteArray("AAADAAAAAQAMAAAAAAAFAAAAAQAMAAAAAAAHAAAAAQAMAAA
 tile_set = SubResource("TileSet_ki8wf")
 
 [node name="fruits" type="Node2D" parent="."]
-position = Vector2(47, 144)
 
 [node name="fruit" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(415, 385)
+position = Vector2(465.498, 337.712)
 
 [node name="fruit2" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(609, 385)
+position = Vector2(528.439, 401.674)
 
 [node name="fruit3" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(416, 194)
+position = Vector2(462.586, 465.761)
 
 [node name="fruit4" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(513, 289)
+position = Vector2(592.707, 337.234)
 
 [node name="fruit5" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(607, 192)
+position = Vector2(590.586, 465.491)
 
 [node name="player" parent="." instance=ExtResource("4_aqy28")]
 position = Vector2(208, 400)
@@ -558,6 +563,30 @@ shape = SubResource("RectangleShape2D_yf0lp")
 [node name="bot wall" type="CollisionShape2D" parent="wall"]
 position = Vector2(399.5, 783.5)
 shape = SubResource("RectangleShape2D_s3ncp")
+
+[node name="score" type="Label" parent="."]
+offset_left = 25.0
+offset_top = 30.0
+offset_right = 276.0
+offset_bottom = 64.0
+text = "pontos:             record:"
+label_settings = SubResource("LabelSettings_mntpx")
+
+[node name="points" type="Label" parent="score"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 140.0
+offset_bottom = 34.0
+text = "0"
+label_settings = SubResource("LabelSettings_ia6ck")
+
+[node name="record" type="Label" parent="score"]
+layout_mode = 0
+offset_left = 265.0
+offset_right = 305.0
+offset_bottom = 34.0
+text = "0"
+label_settings = SubResource("LabelSettings_ia6ck")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="player" method="_on_timer_timeout"]

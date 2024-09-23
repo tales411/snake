@@ -11,13 +11,13 @@ position = Vector2(0, -7)
 scale = Vector2(0.385714, 0.368421)
 script = ExtResource("1_f1tfn")
 
-[node name="FightJoy14" type="Sprite2D" parent="."]
-position = Vector2(-0.685518, -0.0816751)
-scale = Vector2(1.54236, 1.49974)
-texture = ExtResource("2_nhnxm")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.770782, 0.110092)
+position = Vector2(0, -2.71428)
 shape = SubResource("CircleShape2D_hquoy")
+
+[node name="FightJoy14" type="Sprite2D" parent="."]
+position = Vector2(-1.22026, -2.67165)
+scale = Vector2(1.43164, 1.44383)
+texture = ExtResource("2_nhnxm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
