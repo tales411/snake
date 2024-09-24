@@ -7,6 +7,8 @@ var fruit_entered: bool = false
 var snake_body: Array = [] # lista do corpo da cobra
 var initial_length = 5 # tamanho inicial da cobra
 
+var record = 0
+
 func _ready() -> void:
 	pass
 

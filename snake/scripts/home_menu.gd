@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		if option == 1:
 			_on_play_pressed()
 		elif option == 2:
-			pass
+			_on_settings_pressed()
 		elif option == 3:
 			_on_quit_game_pressed()
 
@@ -37,7 +37,7 @@ func _on_play_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://scenes/settings.tscn")
 
 
 func _on_quit_game_pressed() -> void:

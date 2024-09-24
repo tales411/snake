@@ -4,7 +4,6 @@ extends  Node2D
 var fruit_scene = preload("res://scenes/fruit.tscn")
 var points = 0
 
-var record = 0
 var high_score = 0
 var config = ConfigFile.new()
 
@@ -91,23 +90,23 @@ func _spawn_fruit():
 func _score():
 	points += 1
 	$score/points.text = str(points)
-	if points > record:
-		record = points
+	if points > Global.record:
+		Global.record = points
 		
 		_save_record()
 		
 
 
 func _save_record():
-	$score/record.text = str(record)
+	$score/record.text = str(Global.record)
 	
-	config.set_value("scores", "high_scores", record)
+	config.set_value("scores", "high_scores", Global.record)
 	var path = "user://save.cfg"
 	config.save(path)
-	print(record)
+	print("novo recorde:", Global.record)
 	
 func _load_record():
 	var path = "user://save.cfg"
 	config.load(path)
-	record = config.get_value("scores", "high_scores", record)
-	$score/record.text = str(record)
+	Global.record = config.get_value("scores", "high_scores", Global.record)
+	$score/record.text = str(Global.record)
