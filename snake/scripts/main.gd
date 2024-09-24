@@ -111,4 +111,3 @@ func _load_record():
 	config.load(path)
 	record = config.get_value("scores", "high_scores", record)
 	$score/record.text = str(record)
-
