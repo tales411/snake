@@ -11,7 +11,8 @@ var initial_length = 5 # tamanho inicial da cobra
 
 var record = 0
 
-
+var fruit_number = 5
+var game_mode = 1
 
 func _ready() -> void:
 	pass

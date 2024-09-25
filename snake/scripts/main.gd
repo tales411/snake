@@ -14,6 +14,7 @@ func _ready():
 	Global.snake_body = [] # lista do corpo da cobra
 	Global.initial_length = 5 # tamanho inicial da cobra
 	_load_record()
+	_position_fruits()
 	
 	# cria o corpo inicial da cobra
 	for i in range(Global.initial_length):
@@ -36,6 +37,40 @@ func  _process(delta):
 		_spawn_fruit()
 		_score()
 		Global.fruit_entered = false
+
+
+func _position_fruits():
+	$fruits/fruit1.position.x = 464
+	$fruits/fruit1.position.y = 337
+	$fruits/fruit2.position.x = 529
+	$fruits/fruit2.position.y = 400
+	$fruits/fruit3.position.x = 464
+	$fruits/fruit3.position.y = 465
+	$fruits/fruit4.position.x = 592
+	$fruits/fruit4.position.y = 337
+	$fruits/fruit5.position.x = 592
+	$fruits/fruit5.position.y = 465
+	$fruits/fruit6.position.x = 496
+	$fruits/fruit6.position.y = 369
+	$fruits/fruit7.position.x = 560
+	$fruits/fruit7.position.y = 369
+	$fruits/fruit8.position.x = 496
+	$fruits/fruit8.position.y = 434
+	$fruits/fruit9.position.x = 560
+	$fruits/fruit9.position.y = 434
+	if Global.fruit_number == 3:
+		$fruits/fruit4.queue_free()
+		$fruits/fruit5.queue_free()
+		$fruits/fruit6.queue_free()
+		$fruits/fruit7.queue_free()
+		$fruits/fruit8.queue_free()
+		$fruits/fruit9.queue_free()
+	elif  Global.fruit_number == 5:
+		$fruits/fruit6.queue_free()
+		$fruits/fruit7.queue_free()
+		$fruits/fruit8.queue_free()
+		$fruits/fruit9.queue_free()
+
 
 func _on_timer_timeout() -> void:
 	for i in range(Global.snake_body.size() - 1, 0, -1): # nao entendi o pq do - 1, 0, -1

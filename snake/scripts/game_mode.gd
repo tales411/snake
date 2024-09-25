@@ -1,12 +1,13 @@
 extends Node2D
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	$"options/speed/speed option".position.y = 52
 	$"options/fruits/fruits option".position.y = 49
+	$"options/fruits/fruits option".position.x = -39
+	$options/modes/mode.position.y = 53
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -39,12 +40,25 @@ func _on_confirm_pressed() -> void:
 
 
 func _on_fruit_1_pressed() -> void:
+	Global.fruit_number = 5
 	$"options/fruits/fruits option".position.x = -39
 
 
 func _on_fruit_2_pressed() -> void:
+	Global.fruit_number = 3
 	$"options/fruits/fruits option".position.x = 31
 
 
 func _on_fruit_3_pressed() -> void:
+	Global.fruit_number = 9
 	$"options/fruits/fruits option".position.x = 101
+
+
+func _on_mode_1_pressed() -> void:
+	$options/modes/mode.position.x = 42
+	Global.game_mode = 1
+
+
+func _on_mode_2_pressed() -> void:
+	$options/modes/mode.position.x = 112
+	Global.game_mode = 2
