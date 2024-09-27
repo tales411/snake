@@ -117,7 +117,6 @@ func _spawn_fruit():
 		# Gera uma nova posição aleatória na linha fixa
 		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)# -16 para alinhar no centro
 		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
-		random_x = 2*32 - 16 + (32*2)
 		new_position = Vector2(random_x, random_y)
 		
 		# Verifica se a posição gerada é válida
@@ -161,10 +160,8 @@ func _wall_mode():
 	while valid_position == false:
 		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)
 		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
-		random_x = 2*32 - 16 + (32*2)
 		new_position = Vector2(random_x, random_y)
 		valid_position = _check_wall_position(new_position)
-		
 		
 	wall.position = new_position
 	$wall.add_child(wall)
@@ -183,6 +180,9 @@ func _check_wall_position(new_position):
 		if existing_fruit.position == new_position:
 			print("posição invalida. wall colidindo com fruta")
 			return false
+	if $player.position.distance_to(new_position) < 100:
+		print("posição invalida. proximo demais ao player")
+		return false
 		
 	return true
 	
