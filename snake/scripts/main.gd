@@ -2,6 +2,7 @@ extends  Node2D
 
 
 var fruit_scene = preload("res://scenes/fruit.tscn")
+var wall_scene = preload("res://scenes/wall.tscn")
 var points = 0
 
 var high_score = 0
@@ -36,6 +37,8 @@ func  _process(delta):
 		_grow()
 		_spawn_fruit()
 		_score()
+		if Global.game_mode == 2:
+			_wall_mode()
 		Global.fruit_entered = false
 
 
@@ -98,7 +101,10 @@ func _check_position(new_position):
 		if existing_fruit.position == new_position:
 			print("Posição inválida: em cima de outra fruta")
 			return false
-	
+	for existing_wall in $wall.get_children():
+		if existing_wall.position == new_position:
+			print("Posição invalida. fruta colidindo com wall")
+			return false
 	return true  # Retorna true se não houver colisão
 				
 				
@@ -111,6 +117,7 @@ func _spawn_fruit():
 		# Gera uma nova posição aleatória na linha fixa
 		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)# -16 para alinhar no centro
 		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
+		random_x = 2*32 - 16 + (32*2)
 		new_position = Vector2(random_x, random_y)
 		
 		# Verifica se a posição gerada é válida
@@ -145,3 +152,37 @@ func _load_record():
 	config.load(path)
 	Global.record = config.get_value("scores", "high_scores", Global.record)
 	$score/record.text = str(Global.record)
+
+
+func _wall_mode():
+	var valid_position = false
+	var wall = wall_scene.instantiate()
+	var new_position
+	while valid_position == false:
+		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)
+		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
+		random_x = 2*32 - 16 + (32*2)
+		new_position = Vector2(random_x, random_y)
+		valid_position = _check_wall_position(new_position)
+		
+		
+	wall.position = new_position
+	$wall.add_child(wall)
+	
+func _check_wall_position(new_position):
+	for i in range(Global.snake_body.size() - 1, -1, -1):
+		# Verifica se a nova posição coincide com a posição do corpo da cobra
+		if Global.snake_body[i].position == new_position:
+			print("Posição inválida. Wall colidindo com o corpo da cobra.")
+			return false  # Retorna false se a posição colidir
+	for existing_wall in $wall.get_children():
+		if existing_wall.position == new_position:
+			print("Posição invalida. wall colidindo com outra wall")
+			return false
+	for existing_fruit in $fruits.get_children():
+		if existing_fruit.position == new_position:
+			print("posição invalida. wall colidindo com fruta")
+			return false
+		
+	return true
+	

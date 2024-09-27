@@ -7,6 +7,7 @@ func _ready() -> void:
 	$"options/fruits/fruits option".position.y = 49
 	$"options/fruits/fruits option".position.x = -39
 	$options/modes/mode.position.y = 53
+	$options/modes/mode.position.x = 42
 
 func _process(delta: float) -> void:
 	

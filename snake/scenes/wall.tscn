@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://5mht000whpwq"]
+
+[ext_resource type="Texture2D" uid="uid://duul2eh6ywau2" path="res://tiles/buttonSquare_blue_pressed.png" id="1_q045c"]
+[ext_resource type="Script" path="res://scripts/wall.gd" id="1_xh3ti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_va4is"]
+size = Vector2(31.7187, 33.8651)
+
+[node name="wall" type="Area2D"]
+script = ExtResource("1_xh3ti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_va4is")
+
+[node name="ButtonSquareBluePressed" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_q045c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

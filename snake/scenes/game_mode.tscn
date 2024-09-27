@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bpdjudyw7g5yr"]
+[gd_scene load_steps=16 format=4 uid="uid://bpdjudyw7g5yr"]
 
 [ext_resource type="Texture2D" uid="uid://ygcf5tto41mn" path="res://TileMap/Floor.png" id="1_tgkxo"]
 [ext_resource type="Script" path="res://scripts/game_mode.gd" id="1_yqtr1"]
@@ -516,6 +516,9 @@ font_size = 24
 [sub_resource type="LabelSettings" id="LabelSettings_8y36d"]
 font_size = 24
 
+[sub_resource type="LabelSettings" id="LabelSettings_dsk5g"]
+font_size = 14
+
 [node name="game mode" type="Node2D"]
 script = ExtResource("1_yqtr1")
 
@@ -705,6 +708,15 @@ modulate = Color(1, 1, 1, 0.486275)
 position = Vector2(112, 53)
 scale = Vector2(3.53991, 1.42641)
 texture = ExtResource("4_1c5yy")
+
+[node name="Label" type="Label" parent="options/modes"]
+layout_mode = 0
+offset_left = 9.71643
+offset_top = 42.6503
+offset_right = 215.716
+offset_bottom = 120.65
+text = "standard       wall"
+label_settings = SubResource("LabelSettings_dsk5g")
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="options/speed/speed1" to="." method="_on_speed_1_pressed"]
