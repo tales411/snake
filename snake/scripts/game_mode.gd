@@ -22,17 +22,17 @@ func _on_back_pressed() -> void:
 	
 
 func _on_speed_1_pressed() -> void:
-	Global.move_speed_timer = 0.2
+	Global.move_speed_option = 1
 	$"options/speed/speed option".position.x = -36
 
 
 func _on_speed_2_pressed() -> void:
-	Global.move_speed_timer = 0.13
+	Global.move_speed_option = 2
 	$"options/speed/speed option".position.x = 34
 
 
 func _on_speed_3_pressed() -> void:
-	Global.move_speed_timer = 0.35
+	Global.move_speed_option = 3
 	$"options/speed/speed option".position.x = 104
 	
 
@@ -63,3 +63,8 @@ func _on_mode_1_pressed() -> void:
 func _on_mode_2_pressed() -> void:
 	$options/modes/mode.position.x = 112
 	Global.game_mode = 2
+
+
+func _on_mode_3_pressed() -> void:
+	$options/modes/mode.position.x = 182
+	Global.game_mode = 3

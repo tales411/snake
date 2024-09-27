@@ -551,6 +551,8 @@ position = Vector2(496.093, 433.906)
 [node name="fruit9" parent="fruits" instance=ExtResource("3_p4lmt")]
 position = Vector2(560.018, 433.654)
 
+[node name="slow fruits" type="Node" parent="."]
+
 [node name="player" parent="." instance=ExtResource("4_aqy28")]
 position = Vector2(208, 400)
 collision_mask = 2

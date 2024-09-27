@@ -3,6 +3,7 @@ extends  Node2D
 
 var fruit_scene = preload("res://scenes/fruit.tscn")
 var wall_scene = preload("res://scenes/wall.tscn")
+var slow_fruit_scene = preload("res://scenes/slow_fruit.tscn")
 var points = 0
 
 var high_score = 0
@@ -17,6 +18,14 @@ func _ready():
 	_load_record()
 	_position_fruits()
 	
+	if Global.move_speed_option == 1:
+		Global.move_speed_timer = 0.2
+	elif Global.move_speed_option == 2:
+		Global.move_speed_timer = 0.13
+	elif Global.move_speed_option == 3:
+		Global.move_speed_timer = 0.35
+	if Global.game_mode == 3:
+		Global.move_speed_timer += 0.10
 	# cria o corpo inicial da cobra
 	for i in range(Global.initial_length):
 		var segment = Sprite2D.new()
@@ -39,7 +48,13 @@ func  _process(delta):
 		_score()
 		if Global.game_mode == 2:
 			_wall_mode()
+		elif Global.game_mode == 3:
+			_speed_mode()
 		Global.fruit_entered = false
+		
+	if Global.slow_fruit_entered == true:
+		_slow_fruit()
+		Global.slow_fruit_entered = false
 
 
 func _position_fruits():
@@ -186,3 +201,36 @@ func _check_wall_position(new_position):
 		
 	return true
 	
+func _speed_mode():
+	Global.move_speed_timer = Global.move_speed_timer*0.95
+	if Global.move_speed_option == 2:
+		Global.move_speed_timer -= 0.004
+	var random_value = randi() % 100
+	if random_value < 10:
+		_spawn_slow_fruit()
+		
+
+func _spawn_slow_fruit():
+	var valid_position = false
+	var slow_fruit = slow_fruit_scene.instantiate()
+	var new_position
+	
+	while valid_position == false:
+		# Gera uma nova posição aleatória na linha fixa
+		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)# -16 para alinhar no centro
+		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
+		new_position = Vector2(random_x, random_y)
+		
+		# Verifica se a posição gerada é válida
+		valid_position = _check_position(new_position)
+				
+	# Quando uma posição válida for encontrada, posiciona a fruta
+	slow_fruit.position = new_position
+	$"slow fruits".add_child(slow_fruit)
+	
+
+func _slow_fruit():
+	print("fruta slow")
+	Global.move_speed_timer += 0.11
+	if Global.move_speed_option == 2:
+		Global.move_speed_timer += 0.025

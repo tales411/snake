@@ -31,7 +31,7 @@ func _on_timer_timeout() -> void:
 			Global.direction = new_direction
 		
 	position += Global.direction * Global.grid_size # atualiza a posição da cobra
-
+	move_timer.wait_time = Global.move_speed_timer
 
 func _on_wall_body_entered(body: Node2D) -> void:
 	get_tree().change_scene_to_file("res://scenes/home_menu.tscn")

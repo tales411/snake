@@ -1,10 +1,12 @@
 extends Node
 
 var move_speed_timer = 0.2 # velocidade da cobra
+var move_speed_option = 1
 
 var grid_size = 32 # Tamanho do grid 
 var direction = Vector2.RIGHT # direção inicial (começa indo para a direita)
 var fruit_entered: bool = false
+var slow_fruit_entered: bool = false
 
 var snake_body: Array = [] # lista do corpo da cobra
 var initial_length = 5 # tamanho inicial da cobra
