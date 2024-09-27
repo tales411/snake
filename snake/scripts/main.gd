@@ -2,9 +2,10 @@ extends  Node2D
 
 
 var fruit_scene = preload("res://scenes/fruit.tscn")
+var wall_scene = preload("res://scenes/wall.tscn")
+var slow_fruit_scene = preload("res://scenes/slow_fruit.tscn")
 var points = 0
 
-var record = 0
 var high_score = 0
 var config = ConfigFile.new()
 
@@ -15,7 +16,16 @@ func _ready():
 	Global.snake_body = [] # lista do corpo da cobra
 	Global.initial_length = 5 # tamanho inicial da cobra
 	_load_record()
+	_position_fruits()
 	
+	if Global.move_speed_option == 1:
+		Global.move_speed_timer = 0.2
+	elif Global.move_speed_option == 2:
+		Global.move_speed_timer = 0.13
+	elif Global.move_speed_option == 3:
+		Global.move_speed_timer = 0.35
+	if Global.game_mode == 3:
+		Global.move_speed_timer += 0.10
 	# cria o corpo inicial da cobra
 	for i in range(Global.initial_length):
 		var segment = Sprite2D.new()
@@ -36,7 +46,49 @@ func  _process(delta):
 		_grow()
 		_spawn_fruit()
 		_score()
+		if Global.game_mode == 2:
+			_wall_mode()
+		elif Global.game_mode == 3:
+			_speed_mode()
 		Global.fruit_entered = false
+		
+	if Global.slow_fruit_entered == true:
+		_slow_fruit()
+		Global.slow_fruit_entered = false
+
+
+func _position_fruits():
+	$fruits/fruit1.position.x = 464
+	$fruits/fruit1.position.y = 337
+	$fruits/fruit2.position.x = 529
+	$fruits/fruit2.position.y = 400
+	$fruits/fruit3.position.x = 464
+	$fruits/fruit3.position.y = 465
+	$fruits/fruit4.position.x = 592
+	$fruits/fruit4.position.y = 337
+	$fruits/fruit5.position.x = 592
+	$fruits/fruit5.position.y = 465
+	$fruits/fruit6.position.x = 496
+	$fruits/fruit6.position.y = 369
+	$fruits/fruit7.position.x = 560
+	$fruits/fruit7.position.y = 369
+	$fruits/fruit8.position.x = 496
+	$fruits/fruit8.position.y = 434
+	$fruits/fruit9.position.x = 560
+	$fruits/fruit9.position.y = 434
+	if Global.fruit_number == 3:
+		$fruits/fruit4.queue_free()
+		$fruits/fruit5.queue_free()
+		$fruits/fruit6.queue_free()
+		$fruits/fruit7.queue_free()
+		$fruits/fruit8.queue_free()
+		$fruits/fruit9.queue_free()
+	elif  Global.fruit_number == 5:
+		$fruits/fruit6.queue_free()
+		$fruits/fruit7.queue_free()
+		$fruits/fruit8.queue_free()
+		$fruits/fruit9.queue_free()
+
 
 func _on_timer_timeout() -> void:
 	for i in range(Global.snake_body.size() - 1, 0, -1): # nao entendi o pq do - 1, 0, -1
@@ -64,7 +116,10 @@ func _check_position(new_position):
 		if existing_fruit.position == new_position:
 			print("Posição inválida: em cima de outra fruta")
 			return false
-	
+	for existing_wall in $wall.get_children():
+		if existing_wall.position == new_position:
+			print("Posição invalida. fruta colidindo com wall")
+			return false
 	return true  # Retorna true se não houver colisão
 				
 				
@@ -91,24 +146,91 @@ func _spawn_fruit():
 func _score():
 	points += 1
 	$score/points.text = str(points)
-	if points > record:
-		record = points
+	if points > Global.record:
+		Global.record = points
 		
 		_save_record()
 		
 
 
 func _save_record():
-	$score/record.text = str(record)
+	$score/record.text = str(Global.record)
 	
-	config.set_value("scores", "high_scores", record)
+	config.set_value("scores", "high_scores", Global.record)
 	var path = "user://save.cfg"
 	config.save(path)
-	print(record)
+	print("novo recorde:", Global.record)
 	
 func _load_record():
 	var path = "user://save.cfg"
 	config.load(path)
-	record = config.get_value("scores", "high_scores", record)
-	$score/record.text = str(record)
+	Global.record = config.get_value("scores", "high_scores", Global.record)
+	$score/record.text = str(Global.record)
 
+
+func _wall_mode():
+	var valid_position = false
+	var wall = wall_scene.instantiate()
+	var new_position
+	while valid_position == false:
+		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)
+		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
+		new_position = Vector2(random_x, random_y)
+		valid_position = _check_wall_position(new_position)
+		
+	wall.position = new_position
+	$wall.add_child(wall)
+	
+func _check_wall_position(new_position):
+	for i in range(Global.snake_body.size() - 1, -1, -1):
+		# Verifica se a nova posição coincide com a posição do corpo da cobra
+		if Global.snake_body[i].position == new_position:
+			print("Posição inválida. Wall colidindo com o corpo da cobra.")
+			return false  # Retorna false se a posição colidir
+	for existing_wall in $wall.get_children():
+		if existing_wall.position == new_position:
+			print("Posição invalida. wall colidindo com outra wall")
+			return false
+	for existing_fruit in $fruits.get_children():
+		if existing_fruit.position == new_position:
+			print("posição invalida. wall colidindo com fruta")
+			return false
+	if $player.position.distance_to(new_position) < 100:
+		print("posição invalida. proximo demais ao player")
+		return false
+		
+	return true
+	
+func _speed_mode():
+	Global.move_speed_timer = Global.move_speed_timer*0.95
+	if Global.move_speed_option == 2:
+		Global.move_speed_timer -= 0.004
+	var random_value = randi() % 100
+	if random_value < 10:
+		_spawn_slow_fruit()
+		
+
+func _spawn_slow_fruit():
+	var valid_position = false
+	var slow_fruit = slow_fruit_scene.instantiate()
+	var new_position
+	
+	while valid_position == false:
+		# Gera uma nova posição aleatória na linha fixa
+		var random_x = (randi() % int(22) * 32) - 16 + (32 * 2)# -16 para alinhar no centro
+		var random_y = (randi() % int(19) * 32) - 16 + (32 * 5)
+		new_position = Vector2(random_x, random_y)
+		
+		# Verifica se a posição gerada é válida
+		valid_position = _check_position(new_position)
+				
+	# Quando uma posição válida for encontrada, posiciona a fruta
+	slow_fruit.position = new_position
+	$"slow fruits".add_child(slow_fruit)
+	
+
+func _slow_fruit():
+	print("fruta slow")
+	Global.move_speed_timer += 0.11
+	if Global.move_speed_option == 2:
+		Global.move_speed_timer += 0.025

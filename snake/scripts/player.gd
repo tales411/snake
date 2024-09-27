@@ -1,13 +1,12 @@
 extends CharacterBody2D
 
 
-@export var move_speed_timer = 0.2 # velocidade da cobra
 var move_timer: Timer # timer para controlar o intervalo de movimentação
 var direction_queue: Array = [] # armazena os inputs de direção
 
 func _ready():
 	move_timer = $"../Timer"
-	move_timer.wait_time = move_speed_timer  
+	move_timer.wait_time = Global.move_speed_timer  
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):
@@ -32,7 +31,7 @@ func _on_timer_timeout() -> void:
 			Global.direction = new_direction
 		
 	position += Global.direction * Global.grid_size # atualiza a posição da cobra
-
+	move_timer.wait_time = Global.move_speed_timer
 
 func _on_wall_body_entered(body: Node2D) -> void:
 	get_tree().change_scene_to_file("res://scenes/home_menu.tscn")

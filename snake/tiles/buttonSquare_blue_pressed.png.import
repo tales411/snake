@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn43dqle7jl8w"
-path="res://.godot/imported/fightJoy_14.png-c7d35c6be35fc10c2db9cbe03f1bc9bd.ctex"
+uid="uid://duul2eh6ywau2"
+path="res://.godot/imported/buttonSquare_blue_pressed.png-9488f3f5d4f64900ca6e2edc01a666b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/fightJoy_14.png"
-dest_files=["res://.godot/imported/fightJoy_14.png-c7d35c6be35fc10c2db9cbe03f1bc9bd.ctex"]
+source_file="res://tiles/buttonSquare_blue_pressed.png"
+dest_files=["res://.godot/imported/buttonSquare_blue_pressed.png-9488f3f5d4f64900ca6e2edc01a666b7.ctex"]
 
 [params]
 

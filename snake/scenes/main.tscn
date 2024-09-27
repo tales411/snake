@@ -508,11 +508,11 @@ size = Vector2(797, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3ncp"]
 size = Vector2(797, 27)
 
-[sub_resource type="LabelSettings" id="LabelSettings_mntpx"]
-font_size = 24
+[sub_resource type="LabelSettings" id="LabelSettings_y8qhs"]
+font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_ia6ck"]
-font_size = 24
+[sub_resource type="LabelSettings" id="LabelSettings_t1akc"]
+font_size = 32
 
 [node name="main game" type="Node2D"]
 script = ExtResource("1_ttt0n")
@@ -524,22 +524,34 @@ tile_set = SubResource("TileSet_ki8wf")
 
 [node name="fruits" type="Node2D" parent="."]
 
-[node name="fruit" parent="fruits" instance=ExtResource("3_p4lmt")]
-
-=======
-position = Vector2(464, 304)
+[node name="fruit1" parent="fruits" instance=ExtResource("3_p4lmt")]
+position = Vector2(464, 337)
 
 [node name="fruit2" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(528, 370.52)
+position = Vector2(528.841, 400.792)
 
 [node name="fruit3" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(464, 400)
+position = Vector2(464.841, 465)
 
 [node name="fruit4" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(592, 304)
+position = Vector2(592.841, 339.318)
 
 [node name="fruit5" parent="fruits" instance=ExtResource("3_p4lmt")]
-position = Vector2(592, 400)
+position = Vector2(592.967, 464.312)
+
+[node name="fruit6" parent="fruits" instance=ExtResource("3_p4lmt")]
+position = Vector2(496.358, 369.207)
+
+[node name="fruit7" parent="fruits" instance=ExtResource("3_p4lmt")]
+position = Vector2(560.562, 369.245)
+
+[node name="fruit8" parent="fruits" instance=ExtResource("3_p4lmt")]
+position = Vector2(496.093, 433.906)
+
+[node name="fruit9" parent="fruits" instance=ExtResource("3_p4lmt")]
+position = Vector2(560.018, 433.654)
+
+[node name="slow fruits" type="Node" parent="."]
 
 [node name="player" parent="." instance=ExtResource("4_aqy28")]
 position = Vector2(208, 400)
@@ -567,28 +579,30 @@ position = Vector2(399.5, 783.5)
 shape = SubResource("RectangleShape2D_s3ncp")
 
 [node name="score" type="Label" parent="."]
-offset_left = 25.0
-offset_top = 30.0
-offset_right = 276.0
-offset_bottom = 64.0
-text = "pontos:             record:"
-label_settings = SubResource("LabelSettings_mntpx")
+offset_left = 31.967
+offset_top = 20.1693
+offset_right = 425.967
+offset_bottom = 107.169
+text = "pontos:               record:"
+label_settings = SubResource("LabelSettings_y8qhs")
 
 [node name="points" type="Label" parent="score"]
 layout_mode = 0
-offset_left = 100.0
-offset_right = 140.0
-offset_bottom = 34.0
+offset_left = 125.405
+offset_top = 3.17479
+offset_right = 165.405
+offset_bottom = 48.1748
 text = "0"
-label_settings = SubResource("LabelSettings_ia6ck")
+label_settings = SubResource("LabelSettings_t1akc")
 
 [node name="record" type="Label" parent="score"]
 layout_mode = 0
-offset_left = 265.0
-offset_right = 305.0
-offset_bottom = 34.0
+offset_left = 365.102
+offset_top = 1.5874
+offset_right = 405.102
+offset_bottom = 46.5874
 text = "0"
-label_settings = SubResource("LabelSettings_ia6ck")
+label_settings = SubResource("LabelSettings_t1akc")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="player" method="_on_timer_timeout"]
