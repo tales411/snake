@@ -24,7 +24,7 @@ func _on_back_pressed() -> void:
 func _on_speed_1_pressed() -> void:
 	Global.move_speed_option = 1
 	$"options/speed/speed option".position.x = -36
-
+	
 
 func _on_speed_2_pressed() -> void:
 	Global.move_speed_option = 2
@@ -57,14 +57,23 @@ func _on_fruit_3_pressed() -> void:
 
 func _on_mode_1_pressed() -> void:
 	$options/modes/mode.position.x = 42
+	$options/modes/mode.position.y = 53
 	Global.game_mode = 1
 
 
 func _on_mode_2_pressed() -> void:
 	$options/modes/mode.position.x = 112
+	$options/modes/mode.position.y = 53
 	Global.game_mode = 2
 
 
 func _on_mode_3_pressed() -> void:
 	$options/modes/mode.position.x = 182
+	$options/modes/mode.position.y = 53
 	Global.game_mode = 3
+
+
+func _on_mode_4_pressed() -> void:
+	$options/modes/mode.position.x = 42
+	$options/modes/mode.position.y = 96
+	Global.game_mode = 4

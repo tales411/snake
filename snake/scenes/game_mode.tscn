@@ -705,7 +705,7 @@ offset_bottom = 109.99
 
 [node name="mode" type="Sprite2D" parent="options/modes"]
 modulate = Color(1, 1, 1, 0.486275)
-position = Vector2(182, 53)
+position = Vector2(42, 96)
 scale = Vector2(3.53991, 1.42641)
 texture = ExtResource("4_1c5yy")
 
@@ -715,7 +715,9 @@ offset_left = 9.71643
 offset_top = 42.6503
 offset_right = 215.716
 offset_bottom = 120.65
-text = "standard       wall        + Speed"
+text = "Standard       Wall        + Speed
+
+   Portal"
 label_settings = SubResource("LabelSettings_dsk5g")
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
@@ -729,3 +731,4 @@ label_settings = SubResource("LabelSettings_dsk5g")
 [connection signal="pressed" from="options/modes/mode1" to="." method="_on_mode_1_pressed"]
 [connection signal="pressed" from="options/modes/mode2" to="." method="_on_mode_2_pressed"]
 [connection signal="pressed" from="options/modes/mode3" to="." method="_on_mode_3_pressed"]
+[connection signal="pressed" from="options/modes/mode4" to="." method="_on_mode_4_pressed"]
